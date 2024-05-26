@@ -52,7 +52,7 @@ jobs:
         cd client
         export DISPLAY=:99
         sudo Xvfb :99 -ac -screen 0 1280x1024x24 &
-        npm run test:e2e
+        npm run test
       env:
         FIREFOX_BIN: /usr/bin/firefox
       displayName: 'Run Selenium tests'
