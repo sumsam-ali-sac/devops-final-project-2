@@ -41,12 +41,17 @@ jobs:
       displayName: 'Install Firefox'
   
     - script: |
+        echo "Checking Firefox binary..."
+        ls -l /usr/bin/firefox
+      displayName: 'Check Firefox Binary'
+
+    - script: |
         npm start &
-        sleep 10
+        sleep 5
         cd client
         npm run dev &
-        sleep 10
-      displayName: 'Run Tests with Both Frontend and Backend Running'
+        sleep 5
+      displayName: 'Both Frontend and Backend Running'
 
     - script: |
         cd client
