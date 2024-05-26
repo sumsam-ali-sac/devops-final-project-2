@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="3" failures="0" errors="0" time="29600.181">
-    <testsuite name="__tests__/integration/selenium/selenium.test.js" timestamp="2024-05-26T20:40:38.732Z" hostname="Sumsam" tests="3" failures="0" errors="0" skipped="0" time="6.737">
-        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="loads signup page" time="2.848">
+<testsuites name="vitest tests" tests="3" failures="0" errors="0" time="53.74">
+    <testsuite name="__tests__/integration/selenium/selenium.test.js" timestamp="2024-05-26T21:28:22.046Z" hostname="Sumsam" tests="3" failures="0" errors="0" skipped="0" time="7.415">
+        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="loads signup page" time="2.783">
         </testcase>
-        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="signup with valid credentials" time="1.223">
+        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="signup with valid credentials" time="1.309">
         </testcase>
-        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="login with valid credentials" time="0.55">
+        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="login with valid credentials" time="0.507">
         </testcase>
     </testsuite>
 </testsuites>
