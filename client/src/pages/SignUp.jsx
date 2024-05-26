@@ -68,7 +68,8 @@ const SignUp = () => {
 			await dispatch(signUpUser(formData)).unwrap();
 			navigate("/sign-in");
 		} catch (err) {
-			toast.error(err, {
+			toast.error(err.message, {
+				// Ensure the error message is displayed properly
 				position: "top-center",
 				autoClose: 5000,
 				hideProgressBar: false,

@@ -29,7 +29,8 @@ const SignIn = () => {
 			console.log("Login successful:", user);
 			navigate("/");
 		} catch (err) {
-			toast.error(err, {
+			toast.error(err.message, {
+				// Ensure the error message is displayed properly
 				position: "top-center",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -47,6 +48,7 @@ const SignIn = () => {
 	return (
 		<div>
 			<Navbar />
+			<ToastContainer />
 			<div className="flex flex-col items-center justify-center min-h-screen bg-dim-orange px-4 sm:px-6 lg:px-8">
 				<div className="flex flex-col md:flex-row items-center justify-between w-full max-w-6xl mx-auto">
 					<div className="mt-4 md:w-1/2 flex justify-center md:mb-0">
@@ -72,6 +74,7 @@ const SignIn = () => {
 										type="email"
 										placeholder="Email Address"
 										id="email"
+										label="Email Address"
 										required
 										onChange={handleChange}
 										className="w-full bg-white text-black font-worksans tracking-wider placeholder-gray-400 outline-none"
@@ -102,7 +105,6 @@ const SignIn = () => {
 				</div>
 			</div>
 			<Footer />
-			<ToastContainer />
 		</div>
 	);
 };

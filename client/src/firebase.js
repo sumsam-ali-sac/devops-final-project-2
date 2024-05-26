@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-	apiKey: import.meta.env.VITE_FIREBASE_API_KEy,
+	apiKey: "AIzaSyDcgASFGHV4-VEMoQvCxZgMvdl5zf5uLtI",
 	authDomain: "cogniassess-auth.firebaseapp.com",
 	projectId: "cogniassess-auth",
 	storageBucket: "cogniassess-auth.appspot.com",
