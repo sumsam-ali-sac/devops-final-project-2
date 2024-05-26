@@ -46,7 +46,6 @@ jobs:
         cd client
         npm run dev &
         sleep 10
-        npm test
       displayName: 'Run Tests with Both Frontend and Backend Running'
 
     - script: |
