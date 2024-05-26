@@ -17,11 +17,6 @@ jobs:
         checkLatest: true
     
     - script: |
-        sudo apt-get update
-        sudo apt-get install -y firefox
-      displayName: 'Install Firefox'
-
-    - script: |
         cd client
         npm install
         npm run build
@@ -32,6 +27,19 @@ jobs:
       displayName: 'Install Backend Dependencies and Build Backend'
     
 
+
+    - script: |
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+        tar -xvzf geckodriver-v0.26.0-linux64.tar.gz
+        chmod +x geckodriver
+        sudo mv geckodriver /usr/local/bin/
+      displayName: 'Install Geckodriver'
+
+    - script: |
+        sudo apt-get update
+        sudo apt-get install -y firefox
+      displayName: 'Install Firefox'
+  
     - script: |
         npm start &
         sleep 10
@@ -41,6 +49,14 @@ jobs:
         npm test
       displayName: 'Run Tests with Both Frontend and Backend Running'
 
+    - script: |
+        cd client
+        export DISPLAY=:99
+        sudo Xvfb :99 -ac -screen 0 1280x1024x24 &
+        npm run test:e2e
+      env:
+        FIREFOX_BIN: /usr/bin/firefox
+      displayName: 'Run Selenium tests'
 
     - task: PublishBuildArtifacts@1
       inputs:
