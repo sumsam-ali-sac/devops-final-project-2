@@ -23,6 +23,8 @@ export default defineConfig({
 		globals: true,
 		environment: "jsdom",
 		setupFiles: "./src/setupTests.js",
+		reporters: ["default", "junit"],
+		outputFile: "test-results.xml",
 	},
 	plugins: [react()],
 });
