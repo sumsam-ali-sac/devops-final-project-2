@@ -41,9 +41,9 @@ jobs:
       displayName: 'Install Firefox'
   
     - script: |
-        echo "Checking Firefox binary..."
-        ls -l /usr/bin/firefox
-      displayName: 'Check Firefox Binary'
+        echo "Using Firefox from $(which firefox)"
+      displayName: 'Check Firefox Path'
+
 
     - script: |
         npm start &
