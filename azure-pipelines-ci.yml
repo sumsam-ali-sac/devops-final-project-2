@@ -1,0 +1,40 @@
+trigger:
+  branches:
+    include:
+      - main
+      - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Backend
+  displayName: 'Install and Test Node.js Backend'
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '20.x'
+        checkLatest: true
+    
+    - script: |
+        npm install
+      displayName: 'Install Backend'
+
+- job: Frontend
+  displayName: 'Build and Test React.js Frontend'
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '20.x'
+        checkLatest: true
+    
+    - script: |
+        cd client
+        npm install
+        npm run build
+      displayName: 'Install and Build Frontend'
+
+    - script: |
+        cd client
+        npm test
+      displayName: 'Test Frontend'
