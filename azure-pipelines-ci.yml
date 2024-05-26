@@ -8,20 +8,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- job: Backend
-  displayName: 'Install and Test Node.js Backend'
-  steps:
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '20.x'
-        checkLatest: true
-    
-    - script: |
-        npm install
-      displayName: 'Install Backend'
-
-- job: Frontend
-  displayName: 'Build and Test React.js Frontend'
+- job: InstallAndBuild
+  displayName: 'Install Dependencies and Build'
   steps:
     - task: NodeTool@0
       inputs:
@@ -37,9 +25,31 @@ jobs:
         cd client
         npm install
         npm run build
-      displayName: 'Install and Build Frontend'
+      displayName: 'Install Client Dependencies and Build Frontend'
 
     - script: |
+        npm install
+      displayName: 'Install Backend Dependencies and Build Backend'
+    
+
+    - script: |
+        npm start &
+        sleep 10
         cd client
+        npm run dev &
+        sleep 10
         npm test
-      displayName: 'Test Frontend'
+      displayName: 'Run Tests with Both Frontend and Backend Running'
+
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)/client/dist'
+        ArtifactName: 'frontend'
+      displayName: 'Publish Frontend Build Artifacts'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(System.DefaultWorkingDirectory)/api/node/dist'
+        ArtifactName: 'backend'
+      displayName: 'Publish Backend Build Artifacts'
