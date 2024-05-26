@@ -10,8 +10,8 @@ const testPassword = "Sumsam.Ali.189";
 
 beforeAll(async () => {
 	const options = new firefox.Options();
-	// If a custom path to Firefox is needed, uncomment the following line and specify the path
-	// options.setBinary('/path/to/your/firefox/binary');
+	options.setBinary("/usr/bin/firefox");
+	options.addArguments("-headless");
 
 	driver = await new Builder()
 		.forBrowser("firefox")
