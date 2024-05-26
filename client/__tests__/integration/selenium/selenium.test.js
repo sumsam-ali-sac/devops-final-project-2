@@ -1,4 +1,5 @@
 const { Builder, By, until } = require("selenium-webdriver");
+const firefox = require("selenium-webdriver/firefox");
 const axios = require("axios");
 
 let driver;
@@ -8,12 +9,21 @@ const testEmail = `test_${timestamp}@example.com`;
 const testPassword = "Sumsam.Ali.189";
 
 beforeAll(async () => {
-	driver = await new Builder().forBrowser("firefox").build();
+	const options = new firefox.Options();
+	// If a custom path to Firefox is needed, uncomment the following line and specify the path
+	// options.setBinary('/path/to/your/firefox/binary');
+
+	driver = await new Builder()
+		.forBrowser("firefox")
+		.setFirefoxOptions(options)
+		.build();
 });
 
 afterAll(async () => {
+	if (driver) {
+		await driver.quit();
+	}
 	await deleteUser(testEmail);
-	await driver.quit();
 });
 
 async function deleteUser(email) {
