@@ -55,11 +55,7 @@ jobs:
 
     - script: |
         cd client
-        export DISPLAY=:99
-        sudo Xvfb :99 -ac -screen 0 1280x1024x24 &
         npm run test
-      env:
-        FIREFOX_BIN: /snap/bin/firefox
       displayName: 'Run Selenium tests'
 
     - task: PublishBuildArtifacts@1
