@@ -40,6 +40,12 @@ jobs:
       displayName: 'Install Firefox'
 
     - script: |
+        echo "Checking Firefox executable and permissions:"
+        ls -l /snap/bin/firefox
+        file /snap/bin/firefox
+      displayName: 'Check Firefox Executable'
+
+    - script: |
         npm start &
         sleep 5
         cd client
