@@ -31,7 +31,7 @@ afterAll(async () => {
 
 async function deleteUser(email) {
 	try {
-		const response = await axios.delete(`${baseApiUrl}/user/delete`, {
+		const response = await axios.delete(`/api/node/user/delete`, {
 			data: { email },
 		});
 		console.log("User deleted successfully", response.data);
