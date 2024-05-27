@@ -24,7 +24,7 @@ jobs:
 
     - script: |
         npm install
-      displayName: 'Install Backend Dependencies and Build Backend'
+      displayName: 'Install Backend Dependencies'
 
     - script: |
         wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
@@ -36,6 +36,7 @@ jobs:
     - script: |
         sudo apt-get update
         sudo apt-get install -y firefox
+        echo "Firefox installed at: $(which firefox)"
       displayName: 'Install Firefox'
 
     - script: |
