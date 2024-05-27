@@ -35,15 +35,19 @@ jobs:
 
     - script: |
         sudo apt-get update
-        sudo apt-get install -y firefox
+        sudo apt-get install -y wget tar bzip2
+        wget -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+        tar -xjf firefox.tar.bz2
+        sudo mv firefox /opt/firefox
+        sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox
         echo "Firefox installed at: $(which firefox)"
       displayName: 'Install Firefox'
 
     - script: |
         echo "Checking Firefox executable and permissions:"
-        ls -l /snap/bin/firefox
-        file /snap/bin/firefox
-        sudo chmod +x /snap/bin/firefox
+        ls -l /usr/local/bin/firefox
+        file /usr/local/bin/firefox
+        sudo chmod +x /usr/local/bin/firefox
       displayName: 'Check Firefox Executable'
 
     - script: |
