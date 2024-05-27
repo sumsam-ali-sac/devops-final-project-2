@@ -15,7 +15,7 @@ jobs:
       inputs:
         versionSpec: '20.x'
         checkLatest: true
-    
+
     - script: |
         cd client
         npm install
@@ -25,8 +25,6 @@ jobs:
     - script: |
         npm install
       displayName: 'Install Backend Dependencies and Build Backend'
-    
-
 
     - script: |
         wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
@@ -39,19 +37,23 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y firefox
       displayName: 'Install Firefox'
-  
-    - script: |
-        echo "Using Firefox from $(which firefox)"
-      displayName: 'Check Firefox Path'
-
 
     - script: |
         npm start &
-        sleep 5
+        while ! curl --output /dev/null --silent --head --fail http://localhost:5000; do
+          printf '.'
+          sleep 5
+        done
+      displayName: 'Start Backend Server and Check Readiness'
+
+    - script: |
         cd client
         npm run dev &
-        sleep 5
-      displayName: 'Both Frontend and Backend Running'
+        while ! curl --output /dev/null --silent --head --fail http://localhost:5173; do
+          printf '.'
+          sleep 5
+        done
+      displayName: 'Start Frontend Server and Check Readiness'
 
     - script: |
         cd client
@@ -62,10 +64,12 @@ jobs:
       inputs:
         PathtoPublish: '$(System.DefaultWorkingDirectory)/client/dist'
         ArtifactName: 'frontend'
+        publishLocation: 'container'
       displayName: 'Publish Frontend Build Artifacts'
 
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(System.DefaultWorkingDirectory)/api/node/dist'
         ArtifactName: 'backend'
+        publishLocation: 'container'
       displayName: 'Publish Backend Build Artifacts'
