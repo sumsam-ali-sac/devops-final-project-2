@@ -3,6 +3,9 @@ const firefox = require("selenium-webdriver/firefox");
 const axios = require("axios");
 
 let driver;
+const baseApiUrl = process.env.BASE_API_URL || "http://localhost:3000";
+const baseUrl = process.env.BASE_URL || "http://localhost:5173";
+const firefoxPath = process.env.FIREFOX_BIN || "/usr/local/bin/firefox"; // Environment variable or default path
 const timestamp = Date.now();
 const testUsername = `testuser_${timestamp}`;
 const testEmail = `test_${timestamp}@example.com`;
@@ -10,6 +13,7 @@ const testPassword = "Sumsam.Ali.189";
 
 beforeAll(async () => {
 	const options = new firefox.Options();
+	options.setBinary(firefoxPath);
 	options.addArguments("-headless");
 
 	driver = await new Builder()
@@ -27,7 +31,7 @@ afterAll(async () => {
 
 async function deleteUser(email) {
 	try {
-		const response = await axios.delete(`/api/node/user/delete`, {
+		const response = await axios.delete(`${baseApiUrl}/user/delete`, {
 			data: { email },
 		});
 		console.log("User deleted successfully", response.data);
@@ -37,7 +41,7 @@ async function deleteUser(email) {
 }
 
 test("loads signup page", async () => {
-	await driver.get("http://localhost:5173/sign-up");
+	await driver.get(`${baseUrl}/sign-up`);
 	const usernameInput = await driver.findElement(By.id("username"));
 	expect(usernameInput).toBeTruthy();
 	const emailInput = await driver.findElement(By.id("email"));
@@ -51,21 +55,21 @@ test("loads signup page", async () => {
 });
 
 test("signup with valid credentials", async () => {
-	await driver.get("http://localhost:5173/sign-up");
+	await driver.get(`${baseUrl}/sign-up`);
 	await driver.findElement(By.id("username")).sendKeys(testUsername);
 	await driver.findElement(By.id("email")).sendKeys(testEmail);
 	await driver.findElement(By.id("password")).sendKeys(testPassword);
 	await driver.findElement(By.id("confirmPassword")).sendKeys(testPassword);
 	await driver.findElement(By.css('button[type="submit"]')).click();
-	await driver.wait(until.urlIs("http://localhost:5173/sign-in"), 5000);
-	expect(await driver.getCurrentUrl()).toBe("http://localhost:5173/sign-in");
+	await driver.wait(until.urlIs(`${baseUrl}/sign-in`), 5000);
+	expect(await driver.getCurrentUrl()).toBe(`${baseUrl}/sign-in`);
 });
 
 test("login with valid credentials", async () => {
-	await driver.get("http://localhost:5173/sign-in");
+	await driver.get(`${baseUrl}/sign-in`);
 	await driver.findElement(By.id("email")).sendKeys(testEmail);
 	await driver.findElement(By.id("password")).sendKeys(testPassword);
 	await driver.findElement(By.css('button[type="submit"]')).click();
-	await driver.wait(until.urlIs("http://localhost:5173/"), 5000);
-	expect(await driver.getCurrentUrl()).toBe("http://localhost:5173/");
+	await driver.wait(until.urlIs(`${baseUrl}/`), 5000);
+	expect(await driver.getCurrentUrl()).toBe(`${baseUrl}/`);
 });
