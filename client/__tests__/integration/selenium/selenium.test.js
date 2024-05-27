@@ -3,9 +3,9 @@ const firefox = require("selenium-webdriver/firefox");
 const axios = require("axios");
 
 let driver;
-const baseApiUrl = process.env.BASE_API_URL || "http://localhost:3000";
-const baseUrl = process.env.BASE_URL || "http://localhost:5173";
-const firefoxPath = process.env.FIREFOX_BIN || "/usr/local/bin/firefox"; // Environment variable or default path
+const baseApiUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:5173";
+const firefoxPath = "/usr/local/bin/firefox";
 const timestamp = Date.now();
 const testUsername = `testuser_${timestamp}`;
 const testEmail = `test_${timestamp}@example.com`;
