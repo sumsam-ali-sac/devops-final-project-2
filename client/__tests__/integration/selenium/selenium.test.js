@@ -14,7 +14,7 @@ const testPassword = "Sumsam.Ali.189";
 beforeAll(async () => {
 	const options = new firefox.Options();
 	options.setBinary(firefoxPath);
-	// options.addArguments("-headless");
+	options.addArguments("-headless");
 
 	driver = await new Builder()
 		.forBrowser("firefox")
