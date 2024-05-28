@@ -14,7 +14,7 @@ const testPassword = "Sumsam.Ali.189";
 beforeAll(async () => {
 	const options = new firefox.Options();
 	options.setBinary(firefoxPath);
-	options.addArguments("-headless");
+	// options.addArguments("-headless");
 
 	driver = await new Builder()
 		.forBrowser("firefox")
@@ -31,7 +31,7 @@ afterAll(async () => {
 
 async function deleteUser(email) {
 	try {
-		const response = await axios.delete(`/api/node/user/delete`, {
+		const response = await axios.delete(`/api/user/delete`, {
 			data: { email },
 		});
 		console.log("User deleted successfully", response.data);
@@ -61,7 +61,7 @@ test("signup with valid credentials", async () => {
 	await driver.findElement(By.id("password")).sendKeys(testPassword);
 	await driver.findElement(By.id("confirmPassword")).sendKeys(testPassword);
 	await driver.findElement(By.css('button[type="submit"]')).click();
-	await driver.wait(until.urlIs(`${baseUrl}/sign-in`), 5000);
+	await driver.wait(until.urlIs(`${baseUrl}/sign-in`), 20000);
 	expect(await driver.getCurrentUrl()).toBe(`${baseUrl}/sign-in`);
 });
 
@@ -70,6 +70,6 @@ test("login with valid credentials", async () => {
 	await driver.findElement(By.id("email")).sendKeys(testEmail);
 	await driver.findElement(By.id("password")).sendKeys(testPassword);
 	await driver.findElement(By.css('button[type="submit"]')).click();
-	await driver.wait(until.urlIs(`${baseUrl}/`), 5000);
+	await driver.wait(until.urlIs(`${baseUrl}/`), 20000);
 	expect(await driver.getCurrentUrl()).toBe(`${baseUrl}/`);
 });

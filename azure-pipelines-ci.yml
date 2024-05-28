@@ -23,6 +23,7 @@ jobs:
       displayName: 'Install Client Dependencies and Build Frontend'
 
     - script: |
+        cd api
         npm install
       displayName: 'Install Backend Dependencies'
 
@@ -51,8 +52,10 @@ jobs:
       displayName: 'Check Firefox Executable'
 
     - script: |
+        cd api
         npm start &
         sleep 5
+        cd ..
         cd client
         npm run dev &
         sleep 5
@@ -72,7 +75,7 @@ jobs:
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)/api/node/dist'
+        PathtoPublish: '$(System.DefaultWorkingDirectory)/api/dist'
         ArtifactName: 'backend'
         publishLocation: 'container'
       displayName: 'Publish Backend Build Artifacts'

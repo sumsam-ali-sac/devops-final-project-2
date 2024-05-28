@@ -13,7 +13,7 @@ export const signUpUser = createAsyncThunk(
 	"user/signUp",
 	async (userData, { rejectWithValue }) => {
 		try {
-			const response = await fetch("/api/node/auth/signup", {
+			const response = await fetch("/api/auth/signup", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(userData),
@@ -34,7 +34,7 @@ export const signInUser = createAsyncThunk(
 	"user/signIn",
 	async (credentials, { rejectWithValue }) => {
 		try {
-			const response = await fetch("/api/node/auth/signin", {
+			const response = await fetch("/api/auth/signin", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(credentials),
@@ -66,7 +66,7 @@ export const signInWithGoogle = createAsyncThunk(
 				avatar: user.photoURL,
 			};
 
-			const response = await fetch("/api/node/auth/google", {
+			const response = await fetch("/api/auth/google", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
