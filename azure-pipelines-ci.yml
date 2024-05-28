@@ -66,16 +66,16 @@ jobs:
         npm run test
       displayName: 'Run Selenium tests'
 
-    - task: PublishBuildArtifacts@1
+    - task: CopyFiles@2
       inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)/client/dist'
-        ArtifactName: 'frontend'
-        publishLocation: 'container'
-      displayName: 'Publish Frontend Build Artifacts'
+        Contents: |
+          client/dist/**
+          api/**
+        TargetFolder: $(Build.ArtifactStagingDirectory)
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(System.DefaultWorkingDirectory)/api/dist'
-        ArtifactName: 'backend'
-        publishLocation: 'container'
-      displayName: 'Publish Backend Build Artifacts'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
