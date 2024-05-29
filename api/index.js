@@ -4,8 +4,7 @@ import { config as dotenvConfig } from "dotenv";
 import { setupMiddlewares } from "./config/middleware.js";
 import { connectDB } from "./lib/connectDB.js";
 import { setupRoutes } from "./config/routes.js";
-import { errorHandler } from "./middleware/errorHandler.js";
-
+import path from "path";
 dotenvConfig();
 connectDB();
 
@@ -13,8 +12,7 @@ const app = express();
 
 setupMiddlewares(app);
 setupRoutes(app);
-
-app.use(express.static("client_build"));
+app.use(express.static(path.join(__dirname, "client_build")));
 app.get("*", (req, res) => {
 	res.sendFile(path.resolve(__dirname, "client_build", "index.html"));
 });

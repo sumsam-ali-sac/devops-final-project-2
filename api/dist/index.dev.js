@@ -12,7 +12,7 @@ var _connectDB = require("./lib/connectDB.js");
 
 var _routes = require("./config/routes.js");
 
-var _errorHandler = require("./middleware/errorHandler.js");
+var _path = _interopRequireDefault(require("path"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -21,9 +21,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var app = (0, _express["default"])();
 (0, _middleware.setupMiddlewares)(app);
 (0, _routes.setupRoutes)(app);
-app.use(_express["default"]["static"]("client_build"));
+app.use(_express["default"]["static"](_path["default"].join(__dirname, "client_build")));
 app.get("*", function (req, res) {
-  res.sendFile(path.resolve(__dirname, "client_build", "index.html"));
+  res.sendFile(_path["default"].resolve(__dirname, "client_build", "index.html"));
 });
 var server = (0, _http.createServer)(app);
 var PORT = process.env.PORT || 3000;
