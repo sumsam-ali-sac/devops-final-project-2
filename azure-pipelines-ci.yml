@@ -60,17 +60,10 @@ jobs:
         cd client
         npm run test
       displayName: 'Run Selenium tests'
-      
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: 'api'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/api'
-      displayName: 'Copy API to artifact staging directory'
 
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/api'
         ArtifactName: 'drop'
         publishLocation: 'Container'
       displayName: 'Publish build artifacts'
