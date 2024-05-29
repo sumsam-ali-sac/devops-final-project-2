@@ -18,7 +18,7 @@ var _default = (0, _vite.defineConfig)(function (_ref) {
   var PORT = "".concat(env.VITE_PORT || "5173");
   return {
     build: {
-      outDir: "../api"
+      outDir: "../api/client_build"
     },
     server: {
       proxy: {
