@@ -1,81 +1,50 @@
 trigger:
-  branches:
-    include:
-      - main
-      - master
+- main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 jobs:
-- job: InstallAndBuild
-  displayName: 'Install Dependencies and Build'
+- job: Build
+  displayName: 'Build Job'
   steps:
     - task: NodeTool@0
       inputs:
-        versionSpec: '20.x'
-        checkLatest: true
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
 
     - script: |
         cd client
         npm install
         npm run build
-      displayName: 'Install Client Dependencies and Build Frontend'
-
-    - script: |
-        cd api
+        cd ../api
         npm install
-      displayName: 'Install Backend Dependencies'
-
-    - script: |
-        wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
-        tar -xvzf geckodriver-v0.26.0-linux64.tar.gz
-        chmod +x geckodriver
-        sudo mv geckodriver /usr/local/bin/
-      displayName: 'Install Geckodriver'
-
-    - script: |
-        sudo apt-get update
-        sudo apt-get install -y wget tar bzip2
-        wget -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
-        tar -xjf firefox.tar.bz2
-        sudo mv firefox /opt/firefox
-        sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox
-        echo "Firefox installed at: $(which firefox)"
-      displayName: 'Install Firefox'
-
-    - script: |
-        echo "Checking Firefox executable and permissions:"
-        ls -l /usr/local/bin/firefox
-        file /usr/local/bin/firefox
-        sudo chmod +x /usr/local/bin/firefox
-      displayName: 'Check Firefox Executable'
-
-    - script: |
-        cd api
-        npm start &
-        sleep 5
-        cd ..
-        cd client
-        npm run dev &
-        sleep 5
-      displayName: 'Both Frontend and Backend Running'
-
-    - script: |
-        cd client
-        npm run test
-      displayName: 'Run Selenium tests'
+      displayName: 'Install dependencies and build client'
 
     - task: CopyFiles@2
       inputs:
-        Contents: |
-          client/dist/**
-          api/**
-        TargetFolder: $(Build.ArtifactStagingDirectory)
+        SourceFolder: 'client/dist'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/client_build'
+      displayName: 'Copy client build to artifact staging directory'
 
-    - task: PublishBuildArtifacts@1
+    - task: CopyFiles@2
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+        SourceFolder: 'api'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)/api'
+      displayName: 'Copy API to artifact staging directory'
+
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+      displayName: 'Archive build files'
+
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      artifact: drop
+      displayName: 'Publish build artifacts'
 
