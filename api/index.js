@@ -14,10 +14,9 @@ const app = express();
 setupMiddlewares(app);
 setupRoutes(app);
 
-app.use(errorHandler);
-app.use(express.static(path.join(__dirname, "client_build")));
+app.use(express.static("client_build"));
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "client_build/index.html"));
+	res.sendFile(path.resolve(__dirname, "client_build", "index.html"));
 });
 
 const server = createServer(app);

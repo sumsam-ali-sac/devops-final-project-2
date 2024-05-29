@@ -21,10 +21,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var app = (0, _express["default"])();
 (0, _middleware.setupMiddlewares)(app);
 (0, _routes.setupRoutes)(app);
-app.use(_errorHandler.errorHandler);
-app.use(_express["default"]["static"](path.join(__dirname, "client_build")));
+app.use(_express["default"]["static"]("client_build"));
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "client_build/index.html"));
+  res.sendFile(path.resolve(__dirname, "client_build", "index.html"));
 });
 var server = (0, _http.createServer)(app);
 var PORT = process.env.PORT || 3000;
