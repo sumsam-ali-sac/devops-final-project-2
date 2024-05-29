@@ -8,6 +8,9 @@ export default defineConfig(({ mode }) => {
 	const PORT = `${env.VITE_PORT || "5173"}`;
 
 	return {
+		build: {
+			outDir: "../api/client_build",
+		},
 		server: {
 			proxy: {
 				"/api": {
