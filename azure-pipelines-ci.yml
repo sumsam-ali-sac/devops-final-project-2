@@ -63,28 +63,14 @@ jobs:
       
     - task: CopyFiles@2
       inputs:
-        SourceFolder: 'client/dist'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)/client_build'
-      displayName: 'Copy client build to artifact staging directory'
-
-    - task: CopyFiles@2
-      inputs:
         SourceFolder: 'api'
         Contents: '**'
         TargetFolder: '$(Build.ArtifactStagingDirectory)/api'
       displayName: 'Copy API to artifact staging directory'
 
-    - task: ArchiveFiles@2
+    - task: PublishBuildArtifacts@1
       inputs:
-        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        replaceExistingArchive: true
-      displayName: 'Archive build files'
-
-    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-      artifact: drop
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
       displayName: 'Publish build artifacts'
-
