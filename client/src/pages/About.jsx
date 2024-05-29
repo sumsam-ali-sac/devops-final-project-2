@@ -28,13 +28,13 @@ const Section = ({ id, title, content, image, video }) => {
 			animate={controls}
 			variants={variants}
 			transition={{ duration: 0.8 }}
-			className="grid grid-cols-1 md:grid-cols-2 bg-[#EFE7DA]  shadow-lg rounded-lg p-6 m-6 overflow-hidden"
+			className="grid grid-cols-1 md:grid-cols-2 bg-[#DDC9B4]  shadow-lg rounded-lg p-6 m-6 overflow-hidden"
 			id={id}>
 			<div>
 				<h2 className="text-2xl font-rubic font-black text-neon-orange">
 					{title}
 				</h2>
-				<p className="mt-4 text-xl font-worksans text-off-white">
+				<p className="mt-4 text-xl font-worksans text-[#222]">
 					{content}
 				</p>
 			</div>
@@ -100,7 +100,7 @@ const About = () => {
 	];
 
 	return (
-		<div className="bg-[#DDC9B4]">
+		<div className="bg-[#EFE7DA]">
 			<Navbar />
 			<div className="container  mb-16 mx-auto px-4 ">
 				<h1 className="text-4xl mt-16 font-rubic font-black text-center text-neon-orange py-6">

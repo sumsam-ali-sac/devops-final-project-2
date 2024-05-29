@@ -31,14 +31,14 @@ function ContactForm() {
 	};
 
 	return (
-		<div className="flex items-center justify-center min-h-screen bg-[#DDC9B4] ">
+		<div className="flex items-center justify-center min-h-screen bg-[#EFE7DA] ">
 			<form
 				onSubmit={handleSubmit}
-				className="w-full max-w-lg p-8 space-y-6 bg-[[#EFE7DA]] rounded-lg shadow-lg">
+				className="w-full max-w-lg p-8 space-y-6 bg-[#DDC9B4] rounded-lg shadow-lg">
 				<div>
 					<label
 						htmlFor="name"
-						className="block mb-2 text-lg font-medium text-off-white">
+						className="block mb-2 text-lg font-medium text-[#222]">
 						Your Name
 					</label>
 					<input
@@ -54,7 +54,7 @@ function ContactForm() {
 				<div>
 					<label
 						htmlFor="email"
-						className="block mb-2 text-lg font-medium text-off-white">
+						className="block mb-2 text-lg font-medium text-[#222]">
 						Your Email
 					</label>
 					<input
@@ -70,7 +70,7 @@ function ContactForm() {
 				<div>
 					<label
 						htmlFor="message"
-						className="block mb-2 text-lg font-medium text-off-white">
+						className="block mb-2 text-lg font-medium text-[#222]">
 						Your Message
 					</label>
 					<textarea
@@ -84,7 +84,7 @@ function ContactForm() {
 				</div>
 				<button
 					type="submit"
-					className="w-full px-5 py-2 text-lg font-medium text-[[#EFE7DA]] bg-[#DDC9B4] rounded-lg hover:bg-[#DDC9B4] hover:text-dim-orange focus:outline-none focus:ring-4 focus:ring-neon-orange">
+					className="w-full px-5 py-2 text-lg font-medium text-[#EFE7DA] border-2 border-neon-orange bg-neon-orange rounded-lg hover:bg-[#DDC9B4] hover:text-neon-orange focus:outline-none focus:ring-4 focus:ring-neon-orange">
 					Send Message
 				</button>
 			</form>

@@ -41,12 +41,12 @@ function Navbar() {
 					} lg:flex flex-col lg:flex-row items-center font-worksans tracking-wider text-base absolute lg:relative top-full left-0 right-0 lg:right-auto w-full lg:w-auto bg-dim-orange lg:bg-transparent transition-all duration-1000 ease-in-out`}>
 					<Link
 						to="/about"
-						className="text-[#222] mr-3 py-3 px-4 hover:text-dim-orange transition-colors">
+						className="text-[#222] mr-3 py-3 px-4 hover:text-neon-orange transition-colors">
 						About Us
 					</Link>
 					<Link
 						to="/contact-us"
-						className="text-[#222] mr-3 py-3 px-4 hover:text-dim-orange transition-colors">
+						className="text-[#222] mr-3 py-3 px-4 hover:text-neon-orange transition-colors">
 						Contact Us
 					</Link>
 					<div className="flex flex-col lg:flex-row items-center justify-center lg:justify-start">

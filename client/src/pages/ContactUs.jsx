@@ -5,7 +5,7 @@ import ContactForm from "../components/ContactForm";
 
 function ContactUS() {
 	return (
-		<div className="bg-[#DDC9B4]">
+		<div className="bg-[#EFE7DA]">
 			<Navbar />
 			<ContactForm />
 			<Footer />
