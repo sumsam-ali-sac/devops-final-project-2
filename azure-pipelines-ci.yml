@@ -12,6 +12,30 @@ jobs:
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
+      
+    - script: |
+        wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+        tar -xvzf geckodriver-v0.26.0-linux64.tar.gz
+        chmod +x geckodriver
+        sudo mv geckodriver /usr/local/bin/
+      displayName: 'Install Geckodriver'
+
+    - script: |
+        sudo apt-get update
+        sudo apt-get install -y wget tar bzip2
+        wget -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+        tar -xjf firefox.tar.bz2
+        sudo mv firefox /opt/firefox
+        sudo ln -s /opt/firefox/firefox /usr/local/bin/firefox
+        echo "Firefox installed at: $(which firefox)"
+      displayName: 'Install Firefox'
+
+    - script: |
+        echo "Checking Firefox executable and permissions:"
+        ls -l /usr/local/bin/firefox
+        file /usr/local/bin/firefox
+        sudo chmod +x /usr/local/bin/firefox
+      displayName: 'Check Firefox Executable'
 
     - script: |
         cd client
@@ -21,6 +45,21 @@ jobs:
         npm install
       displayName: 'Install dependencies and build client'
 
+    - script: |
+        cd api
+        npm start &
+        sleep 5
+        cd ..
+        cd client
+        npm run dev &
+        sleep 5
+      displayName: 'Both Frontend and Backend Running'
+
+    - script: |
+        cd client
+        npm run test
+      displayName: 'Run Selenium tests'
+      
     - task: CopyFiles@2
       inputs:
         SourceFolder: 'client/dist'
