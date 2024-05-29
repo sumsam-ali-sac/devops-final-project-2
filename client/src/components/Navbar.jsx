@@ -42,7 +42,7 @@ function Navbar() {
 					<Link
 						to="/about"
 						className="text-[#222] mr-3 py-3 px-4 hover:text-neon-orange transition-colors">
-						About Us
+						About Helphive
 					</Link>
 					<Link
 						to="/contact-us"
