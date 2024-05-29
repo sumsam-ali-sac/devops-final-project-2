@@ -3,7 +3,7 @@ const firefox = require("selenium-webdriver/firefox");
 const axios = require("axios");
 
 let driver;
-const baseApiUrl = "http://localhost:3000";
+const baseApiUrl = "http://localhost:8080";
 const baseUrl = "http://localhost:5173";
 const firefoxPath = "/usr/local/bin/firefox";
 const timestamp = Date.now();

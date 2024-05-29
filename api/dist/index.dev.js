@@ -23,7 +23,7 @@ var app = (0, _express["default"])();
 (0, _routes.setupRoutes)(app);
 app.use(_errorHandler.errorHandler);
 var server = (0, _http.createServer)(app);
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 server.listen(PORT, function () {
-  console.log("Server is listening on http://localhost:".concat(PORT));
+  console.log("Server is listening on https://helphivebot.azurewebsites.net/:".concat(PORT));
 });

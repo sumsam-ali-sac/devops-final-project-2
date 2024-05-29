@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites name="vitest tests" tests="3" failures="0" errors="0" time="9.415">
-    <testsuite name="__tests__/integration/selenium/selenium.test.js" timestamp="2024-05-29T06:04:05.200Z" hostname="Sumsam" tests="3" failures="0" errors="0" skipped="0" time="8.057">
-        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="loads signup page" time="3.082">
+<testsuites name="vitest tests" tests="3" failures="0" errors="0" time="7.675">
+    <testsuite name="__tests__/integration/selenium/selenium.test.js" timestamp="2024-05-29T06:06:45.471Z" hostname="Sumsam" tests="3" failures="0" errors="0" skipped="0" time="6.629">
+        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="loads signup page" time="2.962">
         </testcase>
-        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="signup with valid credentials" time="1.026">
+        <testcase classname="__tests__/integration/selenium/selenium.test.js" name="signup with valid credentials" time="1.047">
         </testcase>
         <testcase classname="__tests__/integration/selenium/selenium.test.js" name="login with valid credentials" time="0.499">
         </testcase>

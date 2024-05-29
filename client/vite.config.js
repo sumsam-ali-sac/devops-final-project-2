@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig(({ mode }) => {
 	const env = loadEnv(mode, process.cwd());
 
-	const API_URL = `${env.VITE_BE_API_URL || "http://localhost:3000"}`;
+	const API_URL = `${env.VITE_BE_API_URL || "http://localhost:8080"}`;
 	const PORT = `${env.VITE_PORT || "5173"}`;
 
 	return {
