@@ -61,6 +61,11 @@ jobs:
         npm run test
       displayName: 'Run Selenium tests'
 
+    - script: |
+        mkdir -p $(Build.ArtifactStagingDirectory)
+        cp -R api/* $(Build.ArtifactStagingDirectory)
+      displayName: 'Copy build artifacts'
+
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
