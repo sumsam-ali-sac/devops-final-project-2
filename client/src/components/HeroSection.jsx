@@ -21,9 +21,9 @@ function HeroContent() {
 				Unlock the Power of Information with Helper Hive's Tailored
 				Assistance and Instant Answers for Your Queries
 			</p>
-			<Link to="http://localhost:5174">
+			<Link to="https://helphivechat.azurewebsites.net/">
 				<button className="bg-neon-orange text-[#222] font-worksans px-4 py-2 md:px-8 md:py-4 text-sm md:text-lg m-1 cursor-pointer rounded-lg transition-colors border-2 border-neon-orange hover:bg-dim-orange hover:text-neon-orange">
-					Get Help
+					Talk to Helphive
 				</button>
 			</Link>
 
